@@ -1,0 +1,45 @@
+<div class="form-header">
+  <a routerLink="/" class="back-link">← Back to Products</a>
+</div>
+
+
+<form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+  <!-- Your form fields remain here -->
+</form>
+
+<div class="container mt-4">
+  <div class="card shadow-sm p-4">
+    <h2 class="mb-4">{{ editing ? 'Edit Product' : 'Add Product' }}</h2>
+
+    <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+      <div class="mb-3">
+        <label class="form-label">Name</label>
+        <input formControlName="name" class="form-control" />
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Price</label>
+        <input type="number" formControlName="price" class="form-control" />
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Quantity</label>
+        <input type="number" formControlName="quantityInStock" class="form-control" />
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Description</label>
+        <input formControlName="description" class="form-control" />
+      </div>
+
+      <div class="mb-4">
+        <label class="form-label">Category</label>
+        <input formControlName="category" class="form-control" />
+      </div>
+
+      <button type="submit" class="btn btn-primary w-100">
+        {{ editing ? 'Update' : 'Create' }} Product
+      </button>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,29 @@
+<!-- loading / error states -->
+<p *ngIf="loading" class="status-message">Loading product details…</p>
+<p *ngIf="error" class="text-danger">{{ error }}</p>
+
+<!-- main details -->
+<ng-container *ngIf="!loading && product as p">
+  <div class="product-card">
+    <h2 class="product-title">{{ p.name }}</h2>
+    <div class="product-info">
+      <div class="info-row">
+        <span class="label">Price:</span>
+        <span class="value">{{ p.price | currency }}</span>
+      </div>
+      <div class="info-row">
+        <span class="label">Quantity in stock:</span>
+        <span class="value">{{ p.quantityInStock }}</span>
+      </div>
+      <div class="info-row">
+        <span class="label">Description:</span>
+        <span class="value">{{ p.description || '—' }}</span>
+      </div>
+      <div class="info-row">
+        <span class="label">Category:</span>
+        <span class="value">{{ p.category || '—' }}</span>
+      </div>
+    </div>
+    <a routerLink="/" class="btn back-button">⬅ Back to list</a>
+  </div>
+</ng-container>

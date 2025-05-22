@@ -1,0 +1,56 @@
+
+<div class="container">
+  <h2 class="page-title">Product List</h2>
+
+  <div class="top-bar">
+    <input
+      type="text"
+      [(ngModel)]="searchTerm"
+      (input)="onSearch()"
+      placeholder="🔍 Search products..."
+      class="search-input"
+    />
+    <a routerLink="/create" class="create-btn">+Create Product</a>
+  </div>
+
+  <p *ngIf="loading" class="status-message">Loading…</p>
+  <p *ngIf="error" class="text-danger">{{ error }}</p>
+  <p *ngIf="!loading && filteredProducts.length === 0">No products found.</p>
+
+  <table class="product-table" *ngIf="!loading && paginatedProducts.length > 0">
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Price</th>
+      <th>Quantity</th>
+      <th>Category</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let p of paginatedProducts">
+      <td>{{ p.name }}</td>
+      <td>{{ p.price | currency }}</td>
+      <td>{{ p.quantityInStock }}</td>
+      <td>{{ p.category }}</td>
+      <td>
+        <button [routerLink]="['/details', p.id]" class="btn info">Details</button>
+        <button [routerLink]="['/edit', p.id]" class="btn warning">Edit</button>
+        <button (click)="delete(p.id!)" class="btn danger">Delete</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+  <div class="pagination-controls" *ngIf="totalPages > 1">
+    <button (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1">⟨</button>
+    <button
+      *ngFor="let page of totalPagesArray"
+      (click)="changePage(page)"
+      [class.active]="page === currentPage"
+    >
+      {{ page }}
+    </button>
+    <button (click)="changePage(currentPage + 1)" [disabled]="currentPage === totalPages">⟩</button>
+  </div>
+</div>
